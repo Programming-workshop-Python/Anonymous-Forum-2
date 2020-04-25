@@ -1,7 +1,16 @@
+# migration alembic
+alembic.ini
+# ide
+.idea
+# app
+.env
+# logs
+logs.log
+
 # Byte-compiled / optimized / DLL files
-__pycache__/
 *.py[cod]
 *$py.class
+__pycache__
 
 # C extensions
 *.so
