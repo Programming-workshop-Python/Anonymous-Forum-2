@@ -21,10 +21,10 @@ from src.app_bundle.services.validators.entity.thread_validator import ThreadVal
 # POSTS
 thread_adapter = ThreadAdapter()
 thread_service = ThreadService(
-        ThreadRepository(Thread()),
-        ThreadBuilder(),
-        ThreadValidator()
-    )
+    ThreadRepository(Thread()),
+    ThreadBuilder(),
+    ThreadValidator()
+)
 post_adapter = PostAdapter(thread_adapter)
 post_api_controller_v1 = PostApiControllerV1(
     PostService(
@@ -46,6 +46,12 @@ def posts_all_v1():
 @app.route("/api/v1/posts/get", methods=['GET'])
 def post_get_v1():
     return post_api_controller_v1.get(request)
+
+
+@app.route("/api/v1/posts/get_by_tread", methods=['GET'])
+def get_posts_from_thread_v1():
+    x = post_api_controller_v1.get_posts_from_thread(request)
+    return x
 
 
 @app.route("/api/v1/posts/create", methods=['POST'])
