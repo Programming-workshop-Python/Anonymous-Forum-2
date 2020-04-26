@@ -1,3 +1,5 @@
+[![Run on Repl.it](https://repl.it/badge/github/Programming-workshop-Python/Anonymous-Forum-2)](https://repl.it/github/Programming-workshop-Python/Anonymous-Forum-2)
+
 Use _alembic_ for migration https://alembic.sqlalchemy.org/en/latest/
 
 Run
