@@ -7,10 +7,11 @@ from src.app_bundle.services.validators.entity.abstract_entity_validator import 
 class PostValidator(AbstractEntityValidator):
 
     def validate(self, entity: Post):
-        errors = {'name': [], 'content': []}
+        errors = {'name': [], 'content': [], 'thread': []}
 
         name = entity.get_name()
         content = entity.get_content()
+        thread = entity.get_thread()
 
         if name is None:
             errors['name'].append('required')
@@ -20,6 +21,9 @@ class PostValidator(AbstractEntityValidator):
 
         if isinstance(name, str) and len(name) > 255:
             errors['name'].append('Max length is 255')
+
+        if thread is None:
+            errors['thread'].append('required')
 
         for key in list(errors):
             if not errors[key]:

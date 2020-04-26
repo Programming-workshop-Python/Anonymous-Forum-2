@@ -1,17 +1,21 @@
 from datetime import datetime
 from typing import Union
+
+from src.app_bundle.entities.thread import Thread
 from src.app_bundle.helpers.dto.abstract_entity_dto import AbstractEntityDTO
 
 
 class PostDTO(AbstractEntityDTO):
 
     def __init__(self, id: Union[int, None], name: Union[str, None], content: Union[str, None],
-                 created_on: Union[datetime, None], updated_on: Union[datetime, None]) -> None:
+                 created_on: Union[datetime, None], updated_on: Union[datetime, None],
+                 thread: Union[Thread, int, None]) -> None:
         super().__init__(id)
         self.__name = name
         self.__content = content
         self.__updated_on = updated_on
         self.__created_on = created_on
+        self.__thread = thread
 
     def get_id(self):
         return self._id
@@ -28,6 +32,9 @@ class PostDTO(AbstractEntityDTO):
     def get_updated_on(self):
         return self.__updated_on
 
+    def get_thread(self):
+        return self.__thread
+
     def to_dict(self) -> dict:
         return {
             'id': self.get_id(),
@@ -35,4 +42,5 @@ class PostDTO(AbstractEntityDTO):
             'content': self.get_content(),
             'created_on': self.get_created_on(),
             'updated_on': self.get_updated_on(),
+            'thread': self.get_thread()
         }

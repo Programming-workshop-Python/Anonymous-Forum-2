@@ -19,12 +19,17 @@ from src.app_bundle.services.validators.entity.thread_validator import ThreadVal
 
 # API VERSION #1
 # POSTS
-
-post_adapter = PostAdapter()
+thread_adapter = ThreadAdapter()
+thread_service = ThreadService(
+        ThreadRepository(Thread()),
+        ThreadBuilder(),
+        ThreadValidator()
+    )
+post_adapter = PostAdapter(thread_adapter)
 post_api_controller_v1 = PostApiControllerV1(
     PostService(
         PostRepository(Post()),
-        PostBuilder(),
+        PostBuilder(thread_service),
         PostValidator()
     ),
     post_adapter
@@ -59,13 +64,8 @@ def post_update_v1():
 
 
 # THREADS
-thread_adapter = ThreadAdapter()
 thread_controller_v1 = ThreadControllerV1(
-    ThreadService(
-        ThreadRepository(Thread()),
-        ThreadBuilder(),
-        ThreadValidator()
-    ),
+    thread_service,
     thread_adapter,
     ThreadsAdapter(thread_adapter)
 )
