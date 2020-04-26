@@ -5,11 +5,11 @@ from src.app_bundle.helpers.dto.thread.thread_dto import ThreadDTO
 
 class ThreadBuilder(AbstractBuilder):
     def build(self, dto: ThreadDTO) -> Thread:
-        post = Thread()
+        thread = Thread()
 
-        post.update_name(dto.get_name())
+        thread.update_name(dto.get_name())
 
-        return post
+        return thread
 
     def rebuild(self, dto: ThreadDTO, entity: Thread) -> Thread:
         entity.update_name(dto.get_name())
