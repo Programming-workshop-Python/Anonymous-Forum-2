@@ -24,6 +24,6 @@ class PostBuilder(AbstractBuilder):
     def __change(self, entity: Post, dto: PostDTO) -> Post:
         entity.update_name(dto.get_name()) \
             .update_content(dto.get_content()) \
-            .update_thread(self.thread_service.get(ThreadDTO(dto.get_thread(), dto.get_name())))
+            .update_thread(self.thread_service.get(ThreadDTO(dto.get_thread(), dto.get_name(), None)))
 
         return entity

@@ -27,10 +27,12 @@ from src.app_bundle.services.validators.entity.thread_validator import ThreadVal
 
 # API VERSION #1
 # POSTS
-thread_adapter = ThreadAdapter()
+board_adapter = BoardAdapter()
+board_service = BoardService(BoardRepository(Board()), BoardBuilder(), BoardValidator())
+thread_adapter = ThreadAdapter(board_adapter)
 thread_service = ThreadService(
     ThreadRepository(Thread()),
-    ThreadBuilder(),
+    ThreadBuilder(board_service),
     ThreadValidator()
 )
 post_adapter = PostAdapter(thread_adapter)
@@ -58,8 +60,7 @@ def post_get_v1():
 
 @app.route("/api/v1/posts/get_by_tread", methods=['GET'])
 def get_posts_from_thread_v1():
-    x = post_api_controller_v1.get_posts_from_thread(request)
-    return x
+    return post_api_controller_v1.get_posts_from_thread(request)
 
 
 @app.route("/api/v1/posts/create", methods=['POST'])
@@ -78,8 +79,6 @@ def post_update_v1():
 
 
 # THREADS
-board_adapter = BoardAdapter()
-board_service = BoardService(BoardRepository(Board()), BoardBuilder(), BoardValidator())
 thread_controller_v1 = ThreadControllerV1(
     thread_service,
     thread_adapter,
