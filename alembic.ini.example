@@ -35,7 +35,10 @@ script_location = alembic
 # are written from script.py.mako
 # output_encoding = utf-8
 
-sqlalchemy.url = mysql+pymysql://your_db_login:your_db_password@localhost/your_db
+#mysql
+#sqlalchemy.url = mysql+pymysql://your_db_login:your_db_password@localhost/your_db
+#postgresql
+sqlalchemy.url = postgresql://your_db_login:your_db_password@localhost/your_db
 
 
 [post_write_hooks]

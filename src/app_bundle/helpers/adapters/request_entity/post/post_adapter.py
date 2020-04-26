@@ -28,7 +28,7 @@ class PostAdapter(AbstractAdapter):
         id = request.args.get('id') if request.json is None else request.json.get('id')
         name = None if request.json is None else request.json.get('name')
         content = None if request.json is None else request.json.get('content')
-        thread = request.args.get('thread') if request.json is None else request.json.get('id')
+        thread = request.args.get('thread') if request.json is None else request.json.get('thread')
 
         return self.to_dto_from_dict({
             'id': id,
