@@ -58,8 +58,8 @@ class AbstractApiController(BaseController):
         pass
 
     def get_all(self):
-        posts = self._service.get_all()
-        response = self._entities_adapter.to_response_data_from_entities(posts)
+        entities = self._service.get_all()
+        response = self._entities_adapter.to_response_data_from_entities(entities)
 
         return jsonify(response), 200
 

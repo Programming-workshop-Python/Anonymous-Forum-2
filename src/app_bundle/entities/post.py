@@ -1,17 +1,20 @@
 from datetime import datetime
 from typing import Union
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 
-from sqlalchemy import Column, Integer, String, Text, DateTime
 from src.app_bundle.entities.base_model import BaseModel
+from src.app_bundle.entities.thread import Thread
 
 
 class Post(BaseModel):
-
     __tablename__ = 'posts'
 
     id = Column(Integer(), primary_key=True)
     name = Column(String(255), nullable=False)
     content = Column(Text(), nullable=False)
+    thread_id = Column(Integer(), ForeignKey('threads.id'))
+    thread = relationship('Thread')
     created_on = Column(DateTime(), default=datetime.utcnow)
     updated_on = Column(DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -39,3 +42,11 @@ class Post(BaseModel):
 
     def get_updated_on(self) -> datetime:
         return self.updated_on
+
+    def get_thread(self) -> Thread:
+        return self.thread
+
+    def update_thread(self, thread: Thread) -> 'Post':
+        self.thread = thread
+
+        return self
