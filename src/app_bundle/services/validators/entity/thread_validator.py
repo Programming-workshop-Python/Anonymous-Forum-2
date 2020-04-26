@@ -1,9 +1,25 @@
-from typing import Tuple
-
-from src.app_bundle.entities.base_model import BaseModel
+from src.app_bundle.entities.thread import Thread
+from src.app_bundle.exceptions.domain_exceptions.entity.validation.entity_validation_exception import \
+    EntityValidationException
 from src.app_bundle.services.validators.entity.abstract_entity_validator import AbstractEntityValidator
 
 
 class ThreadValidator(AbstractEntityValidator):
-    def validate(self, entity: BaseModel) -> Tuple[bool, dict]:
-        pass
+
+    def validate(self, entity: Thread):
+        errors = {'name': []}
+
+        name = entity.get_name()
+
+        if name is None:
+            errors['name'].append('required')
+
+        if isinstance(name, str) and len(name) > 255:
+            errors['name'].append('Max length is 255')
+
+        for key in list(errors):
+            if not errors[key]:
+                errors.pop(key)
+
+        if bool(errors):
+            raise EntityValidationException('Validation error', errors)

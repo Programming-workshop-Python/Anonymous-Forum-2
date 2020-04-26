@@ -7,5 +7,5 @@ class AbstractEntityValidator:
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
-    def validate(self, entity: BaseModel) -> Tuple[bool, dict]:
+    def validate(self, entity: BaseModel):
         pass

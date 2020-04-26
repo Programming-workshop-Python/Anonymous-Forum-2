@@ -1,5 +1,4 @@
 from typing import Union
-
 from src.app_bundle.exceptions.domain_exceptions.entity.base_entity_exception import BaseEntityException
 
 
