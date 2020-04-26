@@ -111,6 +111,11 @@ def threads_update_v1():
     return thread_controller_v1.update(request)
 
 
+@app.route("/api/v1/threads/get_by_board", methods=['GET'])
+def get_threads_from_board_v1():
+    return thread_controller_v1.get_threads_from_board(request)
+
+
 # BOARDS
 board_controller_v1 = BoardControllerV1(
     board_service,
