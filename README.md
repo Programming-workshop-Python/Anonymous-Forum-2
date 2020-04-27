@@ -4,7 +4,7 @@ Use _alembic_ for migration https://alembic.sqlalchemy.org/en/latest/
 
 Run
 ```bash
-python3 -m pip -r requirements.txt 
+python3 -m pip install -r requirements.txt 
 ```
 
 ```bash
